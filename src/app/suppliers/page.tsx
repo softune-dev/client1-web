@@ -1,7 +1,18 @@
+import type { Metadata } from "next";
+import { SupplierPageContent } from "@/components/suppliers/supplier-page-content";
+
+/**
+ * Suppliers page metadata for SEO.
+ */
+export const metadata: Metadata = {
+  title: "Suppliers",
+  description:
+    "Manage LPG suppliers, view contact details, and track vendor relationships for Bhoumic Enterprise.",
+};
+
+/**
+ * SuppliersPage — Server Component entry point.
+ */
 export default function SuppliersPage() {
-  return (
-    <div className="rounded-lg border border-dashed border-border p-8 text-center text-muted-foreground">
-      Suppliers content will be implemented here.
-    </div>
-  );
+  return <SupplierPageContent />;
 }
