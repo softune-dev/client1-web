@@ -1,9 +1,15 @@
 import { type IconType } from "react-icons";
 
+export interface SidebarSubItem {
+  title: string;
+  href: string;
+}
+
 export interface SidebarRoute {
   title: string;
   href: string;
-  icon: IconType;
+  icon: string;
+  subItems?: SidebarSubItem[];
 }
 
 export interface SidebarContextValue {

@@ -6,7 +6,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-0">
       <PageHeader title="Dashboard" description="Overview of your LPG distribution operations" />
       {children}
     </div>

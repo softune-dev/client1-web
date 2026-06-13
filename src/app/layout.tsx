@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, DM_Sans } from "next/font/google";
 import { SidebarProvider } from "@/providers/sidebar-provider";
 import { DashboardLayout } from "@/components/layout/dashboard-layout";
 import "./globals.css";
 
 const inter = Inter({
   variable: "--font-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
   display: "swap",
 });
@@ -25,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${dmSans.variable} h-full antialiased`}>
       <body className="min-h-full font-sans">
         <SidebarProvider>
           <DashboardLayout>{children}</DashboardLayout>

@@ -1,75 +1,85 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { FiMenu, FiBell, FiSearch } from "react-icons/fi";
+import { Menu, Bell, ChevronDown } from "lucide-react";
 import { useSidebar } from "@/hooks/use-sidebar";
-import { sidebarRoutes } from "@/config/sidebar-routes";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { THEME } from "@/constants/theme";
 
 export function Topbar() {
-  const pathname = usePathname();
-  const { setMobileOpen } = useSidebar();
-
-  const currentRoute = sidebarRoutes.find((route) => route.href === pathname);
-  const pageTitle = currentRoute?.title ?? "Dashboard";
+  const { toggleSidebar, setMobileOpen } = useSidebar();
 
   return (
     <header
       className={cn(
-        "sticky top-0 z-30 flex h-16 items-center border-b bg-white/80 backdrop-blur-md transition-all duration-300",
-        "md:pl-0",
+        "sticky top-0 z-30 flex h-16 items-center border-b bg-white/80 backdrop-blur-md transition-all duration-300 border-slate-100 dark:border-border/50",
+        "md:pl-0"
       )}
     >
       <div className="flex w-full items-center justify-between px-4 md:px-6">
-        <div className="flex items-center gap-x-3">
+        {/* Left Side: Sidebar Toggle Menu Icon (Black) & Brand Title */}
+        <div className="flex items-center gap-x-1 md:gap-x-2">
+          {/* Desktop Toggle Button */}
           <Button
             variant="ghost"
             size="icon"
-            className="shrink-0 md:hidden"
-            onClick={() => setMobileOpen(true)}
-            aria-label="Open navigation menu"
+            className="hidden md:flex shrink-0 text-[#0F172A] dark:text-white hover:bg-slate-100 dark:hover:bg-muted/30 cursor-pointer h-12 w-12"
+            onClick={toggleSidebar}
+            aria-label="Toggle sidebar"
           >
-            <FiMenu className="h-5 w-5" />
+            <Menu className="size-5" />
           </Button>
 
-          <h2 className="text-lg font-semibold tracking-tight text-foreground">
-            {pageTitle}
-          </h2>
+          {/* Mobile Drawer Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="flex md:hidden shrink-0 text-[#0F172A] dark:text-white hover:bg-slate-100 dark:hover:bg-muted/30 cursor-pointer h-12 w-12"
+            onClick={() => setMobileOpen(true)}
+            aria-label="Open mobile navigation"
+          >
+            <Menu className="size-6" />
+          </Button>
+
+          <span className="text-md md:text-xl font-semibold tracking-tight text-[#0F172A] dark:text-foreground font-dm-sans select-none">
+            Bhoumic Gas agency
+          </span>
         </div>
 
-        <div className="flex items-center gap-x-2 md:gap-x-3">
-          <div className="relative hidden sm:block">
-            <FiSearch className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search..."
-              className="h-9 w-[200px] rounded-full bg-muted/50 pl-9 text-sm lg:w-[280px]"
-            />
-          </div>
-
+        {/* Right Side: Bell Icon with Count & User Details Profile */}
+        <div className="flex items-center gap-x-4">
           <Button
             variant="ghost"
             size="icon"
-            className="relative shrink-0"
+            className="relative shrink-0 text-[#94A3B8] hover:text-[#0F172A] hover:bg-slate-50 dark:hover:bg-muted/30 cursor-pointer"
             aria-label="View notifications"
           >
-            <FiBell className="h-5 w-5 text-muted-foreground" />
-
-            <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-[#2563EB]" />
+            <Bell className="h-5 w-5" />
+            <span className="absolute -top-1 -right-1 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-[#2563EB] text-[9px] font-bold text-white ring-2 ring-white dark:ring-card">
+              3
+            </span>
           </Button>
 
-          <Avatar className="h-8 w-8 cursor-pointer ring-2 ring-transparent transition-all hover:ring-[#2563EB]/30">
-            <AvatarFallback
-              className="text-xs font-semibold text-white"
-              style={{ backgroundColor: THEME.primary }}
-            >
-              PB
-            </AvatarFallback>
-          </Avatar>
+          <div className="flex items-center gap-x-2.5 pl-3 border-l border-slate-100 dark:border-border/50">
+            <Avatar className="h-8 w-8 cursor-pointer border border-[#E2E8F0] dark:border-border shrink-0">
+              <AvatarFallback
+                className="text-xs font-bold text-white bg-blue-600"
+              >
+                PB
+              </AvatarFallback>
+            </Avatar>
+            
+            <div className="hidden md:flex flex-col text-left font-dm-sans min-w-0">
+              <span className="text-xs font-bold text-[#0F172A] dark:text-foreground leading-none truncate">
+                Pritom Bhoumick
+              </span>
+              <span className="text-[10px] text-[#64748B] dark:text-muted-foreground font-semibold mt-0.5 leading-none">
+                Administrator
+              </span>
+            </div>
+
+            <ChevronDown className="h-4 w-4 text-[#94A3B8] shrink-0" />
+          </div>
         </div>
       </div>
     </header>

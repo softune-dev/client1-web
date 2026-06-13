@@ -34,7 +34,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       >
         <Topbar />
 
-        <main className="flex-1 p-4 md:p-6 lg:p-8">{children}</main>
+        <main className="flex-1 pt-2 pb-4 px-4 md:pt-3 md:pb-6 md:px-6 lg:pt-4 lg:pb-8 lg:px-8">{children}</main>
       </div>
     </div>
   );

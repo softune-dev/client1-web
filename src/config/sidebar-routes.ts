@@ -1,91 +1,91 @@
-import { RiDashboardLine } from "react-icons/ri";
-import {
-  FiUsers,
-  FiPackage,
-  FiTruck,
-  FiMap,
-  FiSettings,
-  FiBarChart2,
-  FiUserCheck,
-  FiRotateCcw,
-  FiClipboard,
-  FiShoppingCart,
-  FiSend,
-  FiShield,
-  FiBriefcase,
-} from "react-icons/fi";
-
 import { type SidebarRoute } from "@/types/sidebar";
 
 export const sidebarRoutes: SidebarRoute[] = [
   {
     title: "Dashboard",
     href: "/dashboard",
-    icon: RiDashboardLine,
+    icon: "dashboard",
   },
   {
     title: "Suppliers",
     href: "/suppliers",
-    icon: FiUsers,
+    icon: "supplier",
   },
   {
     title: "Products",
     href: "/products",
-    icon: FiPackage,
+    icon: "products",
   },
+
   {
     title: "Inventory",
     href: "/inventory",
-    icon: FiClipboard,
+    icon: "inventory",
+    subItems: [
+      { title: "Current Stock", href: "/inventory/current-stock" },
+      { title: "Receive Stock", href: "/inventory/receive-stock" },
+      { title: "Load Vehicle", href: "/inventory/load-vehicle" },
+      { title: "Return Stock", href: "/inventory/return-stock" },
+      { title: "Inventory Ledger", href: "/inventory/inventory-ledger" },
+    ],
   },
   {
     title: "Vehicles",
     href: "/vehicles",
-    icon: FiTruck,
+    icon: "vehicles",
   },
   {
     title: "Drivers",
     href: "/drivers",
-    icon: FiUserCheck,
+    icon: "drivers",
   },
   {
     title: "Marketing Managers",
     href: "/marketing-managers",
-    icon: FiBriefcase,
+    icon: "merketing",
   },
   {
     title: "Trips",
     href: "/trips",
-    icon: FiMap,
+    icon: "trips",
+    subItems: [
+      { title: "All Trips", href: "/trips/all-trips" },
+      { title: "Create Trips", href: "/trips/create-trips" },
+      { title: "Load Trips", href: "/trips/load-trips" },
+    ],
   },
   {
     title: "Deliveries",
     href: "/deliveries",
-    icon: FiSend,
+    icon: "deliveries",
   },
   {
     title: "Returns",
     href: "/returns",
-    icon: FiRotateCcw,
+    icon: "returns",
   },
   {
     title: "Retailers",
     href: "/retailers",
-    icon: FiShoppingCart,
+    icon: "retailers",
   },
   {
     title: "Reports",
     href: "/reports",
-    icon: FiBarChart2,
+    icon: "reports",
   },
   {
     title: "Users & Roles",
     href: "/users-roles",
-    icon: FiShield,
+    icon: "user-role",
+    subItems: [
+      { title: "Users", href: "/users-roles/users" },
+      { title: "Roles", href: "/users-roles/roles" },
+    ],
   },
   {
     title: "Settings",
     href: "/settings",
-    icon: FiSettings,
+    icon: "settings",
   },
 ];
