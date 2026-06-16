@@ -1,21 +1,104 @@
 "use client";
 
-import React, { useState } from "react";
 import Link from "next/link";
 import { PageHeader } from "@/components/common/page-header";
-import { FiSearch, FiFilter } from "react-icons/fi";
 import { Download } from "lucide-react";
 import { StockStats } from "@/components/inventory/receive-stock/stock-stats";
 import { StockTable } from "@/components/inventory/current-stock/stock-table";
 import { RecentActivity } from "@/components/inventory/current-stock/recent-activity";
 import { StockSummary, ActivityLog } from "@/types/inventory";
 
-const INITIAL_STOCK: StockSummary[] = [
-  { size: "12 KG", currentStock: 1250, reserved: 320 },
-  { size: "15 KG", currentStock: 950, reserved: 210 },
-  { size: "18 KG", currentStock: 400, reserved: 90 },
-  { size: "22 KG", currentStock: 160, reserved: 40 },
-  { size: "35 KG", currentStock: 90, reserved: 20 },
+const Bashundhara_STOCK: StockSummary[] = [
+  {
+    company: "BASHUNDHARA",
+    size: "12 KG",
+    package: 155,
+    refill: 20,
+    emptyCylinder: 87,
+  },
+  {
+    company: "BASHUNDHARA",
+    size: "15 KG",
+    package: 90,
+    refill: 32,
+    emptyCylinder: 70,
+  },
+  {
+    company: "BASHUNDHARA",
+    size: "30 KG",
+    package: 105,
+    refill: 30,
+    emptyCylinder: 25,
+  },
+  {
+    company: "BASHUNDHARA",
+    size: "45 KG",
+    package: 12,
+    refill: 10,
+    emptyCylinder: 10,
+  },
+];
+
+const Total_STOCK: StockSummary[] = [
+  {
+    company: "TOTAL",
+    size: "12 KG",
+    package: 155,
+    refill: 20,
+    emptyCylinder: 87,
+  },
+  {
+    company: "TOTAL",
+    size: "15 KG",
+    package: 90,
+    refill: 32,
+    emptyCylinder: 70,
+  },
+  {
+    company: "TOTAL",
+    size: "30 KG",
+    package: 105,
+    refill: 30,
+    emptyCylinder: 25,
+  },
+  {
+    company: "TOTAL",
+    size: "45 KG",
+    package: 12,
+    refill: 10,
+    emptyCylinder: 10,
+  },
+];
+
+const Fresh_STOCK: StockSummary[] = [
+  {
+    company: "FRESH",
+    size: "12 KG",
+    package: 155,
+    refill: 20,
+    emptyCylinder: 87,
+  },
+  {
+    company: "FRESH",
+    size: "15 KG",
+    package: 90,
+    refill: 32,
+    emptyCylinder: 70,
+  },
+  {
+    company: "FRESH",
+    size: "30 KG",
+    package: 105,
+    refill: 30,
+    emptyCylinder: 25,
+  },
+  {
+    company: "FRESH",
+    size: "45 KG",
+    package: 12,
+    refill: 10,
+    emptyCylinder: 10,
+  },
 ];
 
 const RECENT_ACTIVITIES: ActivityLog[] = [
@@ -58,18 +141,6 @@ const RECENT_ACTIVITIES: ActivityLog[] = [
 ];
 
 export default function CurrentStockPage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sizeFilter, setSizeFilter] = useState("All Sizes");
-
-  // Filter Stock Summary
-  const filteredStock = INITIAL_STOCK.filter((item) => {
-    const matchesSearch = item.size
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    const matchesFilter =
-      sizeFilter === "All Sizes" || item.size === sizeFilter;
-    return matchesSearch && matchesFilter;
-  });
 
   // Action Buttons
   const headerActions = (
@@ -109,47 +180,16 @@ export default function CurrentStockPage() {
       <PageHeader title="Inventory" action={headerActions} />
 
       {/* Stats Cards Row */}
-      <StockStats
-        totalStock={2850}
-        todayReceived={250}
-        transferredToday={180}
-        returnsToday={70}
-      />
+      <StockStats fullPackage={250} refill={550} emptyCylinder={50} />
 
-      {/* Search Bar & Filters */}
-      <div className="flex flex-col sm:flex-row items-center gap-3">
-        {/* Search Input */}
-        <div className="relative w-full sm:max-w-xs font-sans text-xs">
-          <FiSearch className="absolute left-3 top-3 text-[#94A3B8]" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by cylinder size..."
-            className="h-9 w-full rounded-md border border-[#E2E8F0] bg-white dark:bg-card dark:border-border pl-9 pr-3 text-xs outline-none focus:border-[#2563EB] text-[#334155] dark:text-foreground font-semibold"
-          />
-        </div>
+      {/* Bashundhara Stock Summary Card */}
+      <StockTable stockData={Bashundhara_STOCK} />
 
-        {/* Filter Dropdown */}
-        <div className="relative w-full sm:w-auto min-w-[100px] font-sans text-xs">
-          <FiFilter className="absolute left-3 top-3 text-[#94A3B8]" />
-          <select
-            value={sizeFilter}
-            onChange={(e) => setSizeFilter(e.target.value)}
-            className="h-9 w-full rounded-md border border-[#E2E8F0] bg-white dark:bg-card dark:border-border pl-9 pr-3 text-xs outline-none focus:border-[#2563EB] text-[#334155] dark:text-foreground appearance-none cursor-pointer font-semibold"
-          >
-            <option value="All Sizes">All Sizes</option>
-            <option value="12 KG">12 KG</option>
-            <option value="15 KG">15 KG</option>
-            <option value="18 KG">18 KG</option>
-            <option value="22 KG">22 KG</option>
-            <option value="35 KG">35 KG</option>
-          </select>
-        </div>
-      </div>
+      {/* Fresh Stock Summary Card */}
+      <StockTable stockData={Fresh_STOCK} />
 
-      {/* Warehouse Stock Summary Card */}
-      <StockTable stockData={filteredStock} />
+      {/* Total Stock Summary Card */}
+      <StockTable stockData={Total_STOCK} />
 
       {/* Recent Inventory Activity Card */}
       <RecentActivity activities={RECENT_ACTIVITIES} />

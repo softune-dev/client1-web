@@ -1,7 +1,9 @@
 export interface StockSummary {
+  company: string,
   size: string;
-  currentStock: number;
-  reserved: number;
+  package: number;
+  refill: number;
+  emptyCylinder: number;
 }
 
 export interface ActivityLog {

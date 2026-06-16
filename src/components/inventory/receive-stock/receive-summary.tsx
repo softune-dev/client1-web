@@ -14,7 +14,7 @@ export function ReceiveSummary({
   quantity,
 }: ReceiveSummaryProps) {
   return (
-    <div className="rounded-sm border border-[#E2E8F0] bg-white p-5 dark:border-border dark:bg-card">
+    <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 dark:border-border dark:bg-card">
       <h3 className="text-base font-semibold tracking-tight text-[#0F172A] dark:text-foreground mb-4 font-dm-sans">
         Receive Summary
       </h3>
