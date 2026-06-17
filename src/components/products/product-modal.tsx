@@ -4,13 +4,15 @@ import React, { useState, useEffect } from "react";
 import { FiX } from "react-icons/fi";
 import { Product } from "@/types/product";
 
-const PRODUCT_NAMES = ["Standard LPG", "Commercial LPG", "Industrial LPG"];
+const PRODUCT_NAMES = ["Bashundhara", "Total", "Fresh"];
 
 interface ProductModalProps {
   isOpen: boolean;
   onClose: () => void;
   product: Product | null;
-  onSave: (productData: Omit<Product, "id" | "sales"> & { id?: number }) => void;
+  onSave: (
+    productData: Omit<Product, "id" | "sales"> & { id?: number },
+  ) => void;
 }
 
 export function ProductModal({
@@ -20,7 +22,7 @@ export function ProductModal({
   onSave,
 }: ProductModalProps) {
   const [formData, setFormData] = useState({
-    name: "Standard LPG",
+    name: "",
     size: "",
     status: "Active" as "Active" | "Inactive",
   });
@@ -38,7 +40,7 @@ export function ProductModal({
         });
       } else {
         setFormData({
-          name: "Standard LPG",
+          name: "Bashundhara",
           size: "",
           status: "Active",
         });
@@ -50,7 +52,7 @@ export function ProductModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Ensure size format is always consistently stored as X KG
     const cleanSize = formData.size.trim();
     const formattedSize = /^\d+$/.test(cleanSize)

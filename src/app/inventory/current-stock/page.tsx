@@ -141,38 +141,15 @@ const RECENT_ACTIVITIES: ActivityLog[] = [
 ];
 
 export default function CurrentStockPage() {
-
   // Action Buttons
   const headerActions = (
-    <div className="flex items-center gap-2">
-      <Link
-        href="/inventory/load-vehicle"
-        className="inline-flex items-center justify-center gap-x-2 rounded-sm border border-[#E2E8F0] bg-white px-3.5 py-3 text-sm font-semibold text-[#334155] hover:bg-slate-50 transition-colors shadow-xs cursor-pointer dark:border-border dark:bg-card dark:text-foreground dark:hover:bg-muted/30"
-      >
-        <svg
-          className="size-4 text-[#334155] dark:text-muted-foreground"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M17 3L21 7L17 11" />
-          <path d="M3 7H21" />
-          <path d="M7 21L3 17L7 13" />
-          <path d="M21 17H3" />
-        </svg>
-        Transfer Stock
-      </Link>
-      <Link
-        href="/inventory/receive-stock"
-        className="inline-flex items-center justify-center gap-x-2 rounded-sm bg-[#2563EB] px-3.5 py-3 text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs cursor-pointer"
-      >
-        <Download className="size-4 text-white" />
-        Receive Stock
-      </Link>
-    </div>
+    <Link
+      href="/inventory/receive-stock"
+      className="inline-flex items-center justify-center gap-x-2 rounded-sm bg-[#2563EB] px-3.5 py-3 text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs cursor-pointer"
+    >
+      <Download className="size-4 text-white" />
+      Receive Stock
+    </Link>
   );
 
   return (
