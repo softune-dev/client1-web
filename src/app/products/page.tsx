@@ -8,21 +8,22 @@ import { Product } from "@/types/product";
 import { FiFilter } from "react-icons/fi";
 
 const INITIAL_PRODUCTS: Product[] = [
-  { id: 1, name: "Bashundhara", size: "12 KG", status: "Active", sales: 8450 },
-  { id: 2, name: "Bashundhara", size: "30 KG", status: "Active", sales: 8450 },
-  { id: 3, name: "Bashundhara", size: "45 KG", status: "Active", sales: 8450 },
-  { id: 4, name: "Total", size: "12 KG", status: "Active", sales: 8450 },
-  { id: 5, name: "Total", size: "17 KG", status: "Active", sales: 8450 },
-  { id: 6, name: "Total", size: "22 KG", status: "Active", sales: 8450 },
-  { id: 7, name: "Fresh", size: "12 KG", status: "Active", sales: 8450 },
-  { id: 8, name: "Fresh", size: "35 KG", status: "Active", sales: 8450 },
-  { id: 9, name: "Fresh", size: "45 KG", status: "Active", sales: 8450 },
+  { id: 1, supplier: "Bashundhara", size: "12 KG", status: "Active", sales: 8450 },
+  { id: 2, supplier: "Bashundhara", size: "30 KG", status: "Active", sales: 8450 },
+  { id: 3, supplier: "Bashundhara", size: "45 KG", status: "Active", sales: 8450 },
+  { id: 4, supplier: "Total", size: "12 KG", status: "Active", sales: 8450 },
+  { id: 5, supplier: "Total", size: "17 KG", status: "Active", sales: 8450 },
+  { id: 6, supplier: "Total", size: "22 KG", status: "Active", sales: 8450 },
+  { id: 7, supplier: "Fresh", size: "12 KG", status: "Active", sales: 8450 },
+  { id: 8, supplier: "Fresh", size: "35 KG", status: "Active", sales: 8450 },
+  { id: 9, supplier: "Fresh", size: "45 KG", status: "Active", sales: 8450 },
 ];
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
   const [currentPage, setCurrentPage] = useState(1);
   const [sizeFilter, setSizeFilter] = useState("All Sizes");
+  const [supplierFilter, setSupplierFilter] = useState("All Suppliers");
   const itemsPerPage = 5;
 
   // Dynamically extract unique sizes from products and sort them numerically
@@ -34,6 +35,11 @@ export default function ProductsPage() {
     });
   }, [products]);
 
+  // Dynamically extract unique suppliers from products and sort them alphabetically
+  const uniqueSuppliers = useMemo(() => {
+    return Array.from(new Set(products.map((p) => p.supplier))).sort();
+  }, [products]);
+
   // Reset filter if the active filter size is no longer present in products
   useEffect(() => {
     if (sizeFilter !== "All Sizes" && !uniqueSizes.includes(sizeFilter)) {
@@ -41,12 +47,21 @@ export default function ProductsPage() {
     }
   }, [sizeFilter, uniqueSizes]);
 
-  // Filter products based on selected size
+  // Reset filter if the active filter supplier is no longer present in products
+  useEffect(() => {
+    if (supplierFilter !== "All Suppliers" && !uniqueSuppliers.includes(supplierFilter)) {
+      setSupplierFilter("All Suppliers");
+    }
+  }, [supplierFilter, uniqueSuppliers]);
+
+  // Filter products based on selected size and supplier
   const filteredProducts = useMemo(() => {
     return products.filter((item) => {
-      return sizeFilter === "All Sizes" || item.size === sizeFilter;
+      const matchesSize = sizeFilter === "All Sizes" || item.size === sizeFilter;
+      const matchesSupplier = supplierFilter === "All Suppliers" || item.supplier === supplierFilter;
+      return matchesSize && matchesSupplier;
     });
-  }, [products, sizeFilter]);
+  }, [products, sizeFilter, supplierFilter]);
 
   // Modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -128,10 +143,32 @@ export default function ProductsPage() {
         disabledSizes={disabledSizesCount}
       />
 
-      {/* Filter Dropdown */}
-      <div className="flex flex-col sm:flex-row items-center gap-3 justify-end">
-        <p className="text-sm font-semibold ">Filter Products by Sizes</p>
-        <div className="relative w-full sm:w-auto min-w-[100px] font-sans text-xs">
+      {/* Filter Dropdowns */}
+      <div className="flex flex-col sm:flex-row items-center gap-3">
+        <p className="text-sm font-semibold text-[#475569] dark:text-slate-300">Filters:</p>
+
+        {/* Supplier Filter */}
+        <div className="relative w-full sm:w-auto min-w-[140px] font-sans text-xs">
+          <FiFilter className="absolute left-3 top-3 text-[#94A3B8]" />
+          <select
+            value={supplierFilter}
+            onChange={(e) => {
+              setSupplierFilter(e.target.value);
+              setCurrentPage(1); // Reset page on filter change
+            }}
+            className="h-9 w-full rounded-md border border-[#E2E8F0] bg-white dark:bg-card dark:border-border pl-9 pr-3 text-xs outline-none focus:border-[#2563EB] text-[#334155] dark:text-foreground appearance-none cursor-pointer font-semibold"
+          >
+            <option value="All Suppliers">All Suppliers</option>
+            {uniqueSuppliers.map((supplier) => (
+              <option key={supplier} value={supplier}>
+                {supplier}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Size Filter */}
+        <div className="relative w-full sm:w-auto min-w-[140px] font-sans text-xs">
           <FiFilter className="absolute left-3 top-3 text-[#94A3B8]" />
           <select
             value={sizeFilter}

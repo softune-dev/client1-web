@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { FiX } from "react-icons/fi";
 import { Product } from "@/types/product";
 
-const PRODUCT_NAMES = ["Bashundhara", "Total", "Fresh"];
+const PRODUCT_SUPPLIERS = ["Bashundhara", "Total", "Fresh"];
 
 interface ProductModalProps {
   isOpen: boolean;
@@ -22,7 +22,7 @@ export function ProductModal({
   onSave,
 }: ProductModalProps) {
   const [formData, setFormData] = useState({
-    name: "",
+    supplier: "",
     size: "",
     status: "Active" as "Active" | "Inactive",
   });
@@ -34,13 +34,13 @@ export function ProductModal({
         // Strip " KG" suffix so the user only sees and edits the numeric part
         const numericSize = product.size.replace(/\s*KG\s*/gi, "");
         setFormData({
-          name: product.name,
+          supplier: product.supplier,
           size: numericSize,
           status: product.status,
         });
       } else {
         setFormData({
-          name: "Bashundhara",
+          supplier: "Bashundhara",
           size: "",
           status: "Active",
         });
@@ -60,7 +60,7 @@ export function ProductModal({
       : cleanSize;
 
     onSave({
-      name: formData.name,
+      supplier: formData.supplier,
       size: formattedSize,
       status: formData.status,
     });
@@ -82,18 +82,18 @@ export function ProductModal({
         </div>
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-          {/* Product Type Selection */}
+          {/* Supplier Selection */}
           <div className="space-y-1">
             <select
-              value={formData.name}
+              value={formData.supplier}
               onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
+                setFormData({ ...formData, supplier: e.target.value })
               }
               className="h-9 w-full rounded-md border border-[#CBD5E1] bg-white dark:bg-card px-2.5 text-sm transition-colors focus:border-[#2563EB] outline-none dark:border-border text-[#334155] dark:text-foreground"
             >
-              {PRODUCT_NAMES.map((name) => (
-                <option key={name} value={name}>
-                  {name}
+              {PRODUCT_SUPPLIERS.map((supplier) => (
+                <option key={supplier} value={supplier}>
+                  {supplier}
                 </option>
               ))}
             </select>

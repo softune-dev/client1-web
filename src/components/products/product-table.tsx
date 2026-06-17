@@ -44,7 +44,7 @@ export function ProductTable({
         <TableHeader>
           <TableRow>
             <TableHead className="w-16">#</TableHead>
-            <TableHead>Product Name</TableHead>
+            <TableHead>Supplier</TableHead>
             <TableHead>Cylinder Size</TableHead>
             <TableHead>Status</TableHead>
             <TableHead className="text-right">Actions</TableHead>
@@ -59,7 +59,7 @@ export function ProductTable({
                   {rowNo}
                 </TableCell>
                 <TableCell className="font-medium text-[#0F172A] dark:text-foreground">
-                  {p.name}
+                  {p.supplier}
                 </TableCell>
                 <TableCell className="font-medium text-[#334155] dark:text-foreground font-sans">
                   {p.size}
