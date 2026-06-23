@@ -124,7 +124,7 @@ export function SidebarItem({
                   )}
                 >
                   {/* Border circle outline (not filled) on the left */}
-                  <span className="h-2 w-2 rounded-full border-2 border-current shrink-0" />
+                  <span className={cn("h-2 w-2 rounded-full border-2 border-current shrink-0", isSubActive && "bg-white")} />
                   <span className="truncate">{sub.title}</span>
                 </Link>
               );

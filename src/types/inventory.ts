@@ -2,7 +2,6 @@ export interface StockSummary {
   company: string,
   size: string;
   package: number;
-  refill: number;
   emptyCylinder: number;
 }
 
@@ -20,6 +19,7 @@ export interface Receipt {
   id: number;
   date: string;
   supplier: string;
+  type: string;
   size: string;
   quantity: number;
   receivedBy: string;

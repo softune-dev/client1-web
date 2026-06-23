@@ -41,7 +41,7 @@ export function StockTable({ stockData }: StockTableProps) {
             <TableHead className="text-center">No.</TableHead>
             <TableHead className="text-center">Size</TableHead>
             <TableHead className="text-center">Package</TableHead>
-            <TableHead className="text-center">Refill</TableHead>
+            
             <TableHead className="text-center">Empty Cylinder</TableHead>
           </TableRow>
         </TableHeader>
@@ -57,9 +57,6 @@ export function StockTable({ stockData }: StockTableProps) {
                 </TableCell>
                 <TableCell className="text-center font-medium text-[#475569] dark:text-foreground font-sans">
                   {item.package.toLocaleString()}
-                </TableCell>
-                <TableCell className="text-center font-medium text-[#475569] dark:text-foreground font-sans">
-                  {item.refill.toLocaleString()}
                 </TableCell>
                 <TableCell className="text-center font-medium text-[#0F172A] dark:text-foreground font-sans">
                   {item.emptyCylinder.toLocaleString()}

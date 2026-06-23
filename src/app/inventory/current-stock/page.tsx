@@ -13,28 +13,24 @@ const Bashundhara_STOCK: StockSummary[] = [
     company: "BASHUNDHARA",
     size: "12 KG",
     package: 155,
-    refill: 20,
     emptyCylinder: 87,
   },
   {
     company: "BASHUNDHARA",
     size: "15 KG",
     package: 90,
-    refill: 32,
     emptyCylinder: 70,
   },
   {
     company: "BASHUNDHARA",
     size: "30 KG",
     package: 105,
-    refill: 30,
     emptyCylinder: 25,
   },
   {
     company: "BASHUNDHARA",
     size: "45 KG",
     package: 12,
-    refill: 10,
     emptyCylinder: 10,
   },
 ];
@@ -44,28 +40,24 @@ const Total_STOCK: StockSummary[] = [
     company: "TOTAL",
     size: "12 KG",
     package: 155,
-    refill: 20,
     emptyCylinder: 87,
   },
   {
     company: "TOTAL",
     size: "15 KG",
     package: 90,
-    refill: 32,
     emptyCylinder: 70,
   },
   {
     company: "TOTAL",
     size: "30 KG",
     package: 105,
-    refill: 30,
     emptyCylinder: 25,
   },
   {
     company: "TOTAL",
     size: "45 KG",
     package: 12,
-    refill: 10,
     emptyCylinder: 10,
   },
 ];
@@ -75,28 +67,24 @@ const Fresh_STOCK: StockSummary[] = [
     company: "FRESH",
     size: "12 KG",
     package: 155,
-    refill: 20,
     emptyCylinder: 87,
   },
   {
     company: "FRESH",
     size: "15 KG",
     package: 90,
-    refill: 32,
     emptyCylinder: 70,
   },
   {
     company: "FRESH",
     size: "30 KG",
     package: 105,
-    refill: 30,
     emptyCylinder: 25,
   },
   {
     company: "FRESH",
     size: "45 KG",
     package: 12,
-    refill: 10,
     emptyCylinder: 10,
   },
 ];
@@ -157,7 +145,7 @@ export default function CurrentStockPage() {
       <PageHeader title="Inventory" action={headerActions} />
 
       {/* Stats Cards Row */}
-      <StockStats fullPackage={250} refill={550} emptyCylinder={50} />
+      <StockStats fullPackage={250} emptyCylinder={550} />
 
       {/* Bashundhara Stock Summary Card */}
       <StockTable stockData={Bashundhara_STOCK} />

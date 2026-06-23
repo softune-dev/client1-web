@@ -13,6 +13,7 @@ const INITIAL_RECEIPTS: Receipt[] = [
     id: 1,
     date: "02 Jun 2025, 10:30 AM",
     supplier: "Fresh LPG Depot",
+    type: "Package",
     size: "12 KG",
     quantity: 100,
     receivedBy: "Super Admin",
@@ -22,6 +23,7 @@ const INITIAL_RECEIPTS: Receipt[] = [
     id: 2,
     date: "02 Jun 2025, 09:45 AM",
     supplier: "Vehicle DHK-TA-1234",
+    type: "Empty Cylinder",
     size: "15 KG",
     quantity: 60,
     receivedBy: "Karimul Hasan",
@@ -31,6 +33,7 @@ const INITIAL_RECEIPTS: Receipt[] = [
     id: 3,
     date: "01 Jun 2025, 05:15 PM",
     supplier: "Bashundhara LPG Supply",
+    type: "Package",
     size: "35 KG",
     quantity: 30,
     receivedBy: "Super Admin",
@@ -45,6 +48,7 @@ export default function ReceiveStockPage() {
 
   // Form states
   const [supplier, setSupplier] = useState("");
+  const [type, setType] = useState("");
   const [cylinderSize, setCylinderSize] = useState("");
   const [quantity, setQuantity] = useState<number | "">("");
   const [receiveDate, setReceiveDate] = useState("");
@@ -115,6 +119,7 @@ export default function ReceiveStockPage() {
       id: Date.now(),
       date: formattedDate,
       supplier: supplier,
+      type: type,
       size: cylinderSize,
       quantity: Number(quantity),
       receivedBy: "Super Admin",
@@ -171,12 +176,14 @@ export default function ReceiveStockPage() {
         <div className="lg:col-span-2">
           <ReceiveForm
             supplier={supplier}
+            type={type}
             cylinderSize={cylinderSize}
             quantity={quantity}
             receiveDate={receiveDate}
             reference={reference}
             notes={notes}
             setSupplier={setSupplier}
+            setType={setType}
             setCylinderSize={setCylinderSize}
             setQuantity={setQuantity}
             setReceiveDate={setReceiveDate}
@@ -185,9 +192,11 @@ export default function ReceiveStockPage() {
             onSubmit={handleSave}
           />
         </div>
+
         <div className="lg:col-span-1">
           <ReceiveSummary
             supplier={supplier}
+            type={type}
             cylinderSize={cylinderSize}
             quantity={quantity}
           />
