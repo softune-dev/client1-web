@@ -1,8 +1,6 @@
 "use client";
 
-import React from "react";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import { Receipt } from "@/types/inventory";
 
 interface ReceiveTableProps {
@@ -11,7 +9,7 @@ interface ReceiveTableProps {
 
 export function ReceiveTable({ receipts }: ReceiveTableProps) {
   return (
-    <div className="rounded-sm border border-[#E2E8F0] bg-white p-5 dark:border-border dark:bg-card">
+    <div className="rounded-xl border border-[#E2E8F0] bg-white p-5 dark:border-border dark:bg-card">
       <div className="flex items-center justify-between pb-2 dark:border-border/50 mb-4 font-dm-sans">
         <h3 className="text-base font-semibold tracking-tight text-[#0F172A] dark:text-foreground">
           Recent Received Stock
@@ -30,10 +28,10 @@ export function ReceiveTable({ receipts }: ReceiveTableProps) {
             <TableRow>
               <TableHead className="text-left">Date</TableHead>
               <TableHead className="text-left">Supplier</TableHead>
+              <TableHead className="text-left">Type</TableHead>
               <TableHead className="text-left">Size</TableHead>
               <TableHead className="text-left">Quantity</TableHead>
               <TableHead className="text-left">Received By</TableHead>
-              <TableHead className="text-left w-32">Status</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -46,6 +44,9 @@ export function ReceiveTable({ receipts }: ReceiveTableProps) {
                   {receipt.supplier}
                 </TableCell>
                 <TableCell className="text-left font-medium text-[#475569] dark:text-foreground font-sans">
+                  {receipt.type}
+                </TableCell>
+                <TableCell className="text-left font-medium text-[#475569] dark:text-foreground font-sans">
                   {receipt.size}
                 </TableCell>
                 <TableCell className="text-left font-medium text-[#475569] dark:text-foreground font-sans">
@@ -53,11 +54,6 @@ export function ReceiveTable({ receipts }: ReceiveTableProps) {
                 </TableCell>
                 <TableCell className="text-left font-medium text-[#475569] dark:text-foreground font-sans">
                   {receipt.receivedBy}
-                </TableCell>
-                <TableCell className="text-left">
-                  <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/20 dark:text-emerald-400 dark:border-none font-bold">
-                    {receipt.status}
-                  </Badge>
                 </TableCell>
               </TableRow>
             ))}

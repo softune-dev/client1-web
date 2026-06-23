@@ -24,7 +24,6 @@ export const sidebarRoutes: SidebarRoute[] = [
     subItems: [
       { title: "Current Stock", href: "/inventory/current-stock" },
       { title: "Receive Stock", href: "/inventory/receive-stock" },
-      { title: "Load Vehicle", href: "/inventory/load-vehicle" },
       { title: "Return Stock", href: "/inventory/return-stock" },
       { title: "Inventory Ledger", href: "/inventory/inventory-ledger" },
     ],

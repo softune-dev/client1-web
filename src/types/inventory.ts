@@ -1,7 +1,8 @@
 export interface StockSummary {
+  company: string,
   size: string;
-  currentStock: number;
-  reserved: number;
+  package: number;
+  emptyCylinder: number;
 }
 
 export interface ActivityLog {
@@ -18,6 +19,7 @@ export interface Receipt {
   id: number;
   date: string;
   supplier: string;
+  type: string;
   size: string;
   quantity: number;
   receivedBy: string;

@@ -13,6 +13,7 @@ const INITIAL_RECEIPTS: Receipt[] = [
     id: 1,
     date: "02 Jun 2025, 10:30 AM",
     supplier: "Fresh LPG Depot",
+    type: "Package",
     size: "12 KG",
     quantity: 100,
     receivedBy: "Super Admin",
@@ -22,6 +23,7 @@ const INITIAL_RECEIPTS: Receipt[] = [
     id: 2,
     date: "02 Jun 2025, 09:45 AM",
     supplier: "Vehicle DHK-TA-1234",
+    type: "Empty Cylinder",
     size: "15 KG",
     quantity: 60,
     receivedBy: "Karimul Hasan",
@@ -31,6 +33,7 @@ const INITIAL_RECEIPTS: Receipt[] = [
     id: 3,
     date: "01 Jun 2025, 05:15 PM",
     supplier: "Bashundhara LPG Supply",
+    type: "Package",
     size: "35 KG",
     quantity: 30,
     receivedBy: "Super Admin",
@@ -42,11 +45,10 @@ export default function ReceiveStockPage() {
   // Stats states
   const [totalStock, setTotalStock] = useState(2850);
   const [receivedToday, setReceivedToday] = useState(250);
-  const [activeSuppliers] = useState(18);
-  const [pendingEntries] = useState(3);
 
   // Form states
   const [supplier, setSupplier] = useState("");
+  const [type, setType] = useState("");
   const [cylinderSize, setCylinderSize] = useState("");
   const [quantity, setQuantity] = useState<number | "">("");
   const [receiveDate, setReceiveDate] = useState("");
@@ -62,7 +64,20 @@ export default function ReceiveStockPage() {
     const dateObj = new Date(dateStr);
     if (isNaN(dateObj.getTime())) return dateStr;
 
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
     const day = String(dateObj.getDate()).padStart(2, "0");
     const month = months[dateObj.getMonth()];
     const year = dateObj.getFullYear();
@@ -104,6 +119,7 @@ export default function ReceiveStockPage() {
       id: Date.now(),
       date: formattedDate,
       supplier: supplier,
+      type: type,
       size: cylinderSize,
       quantity: Number(quantity),
       receivedBy: "Super Admin",
@@ -113,7 +129,7 @@ export default function ReceiveStockPage() {
     setReceipts([newReceipt, ...receipts]);
     setTotalStock((prev) => prev + Number(quantity));
     setReceivedToday((prev) => prev + Number(quantity));
-    
+
     // Clear form fields
     setSupplier("");
     setCylinderSize("");
@@ -130,7 +146,15 @@ export default function ReceiveStockPage() {
         onClick={() => handleSave()}
         className="inline-flex items-center justify-center gap-x-2 rounded-sm bg-[#2563EB] px-4 py-3 text-sm font-semibold text-white hover:bg-[#1D4ED8] transition-colors shadow-xs cursor-pointer border-none font-dm-sans"
       >
-        <svg className="size-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          className="size-4 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" />
           <polyline points="17 21 17 13 7 13 7 21" />
           <polyline points="7 3 7 8 15 8" />
@@ -145,24 +169,21 @@ export default function ReceiveStockPage() {
       <PageHeader title="Inventory" action={headerActions} />
 
       {/* Stats Cards Row */}
-      <ReceiveStats
-        totalStock={totalStock}
-        receivedToday={receivedToday}
-        activeSuppliers={activeSuppliers}
-        pendingEntries={pendingEntries}
-      />
+      <ReceiveStats totalStock={totalStock} receivedToday={receivedToday} />
 
       {/* Form and Summary Split Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
           <ReceiveForm
             supplier={supplier}
+            type={type}
             cylinderSize={cylinderSize}
             quantity={quantity}
             receiveDate={receiveDate}
             reference={reference}
             notes={notes}
             setSupplier={setSupplier}
+            setType={setType}
             setCylinderSize={setCylinderSize}
             setQuantity={setQuantity}
             setReceiveDate={setReceiveDate}
@@ -171,9 +192,11 @@ export default function ReceiveStockPage() {
             onSubmit={handleSave}
           />
         </div>
+
         <div className="lg:col-span-1">
           <ReceiveSummary
             supplier={supplier}
+            type={type}
             cylinderSize={cylinderSize}
             quantity={quantity}
           />
